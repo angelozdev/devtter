@@ -3,7 +3,6 @@
 This is a really simple project that shows the usage of Next.js with TypeScript.
 ![](./screenshot.png)
 
-
 ## Deploy your own
 
 Deploy the example using [Vercel](https://vercel.com):

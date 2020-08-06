@@ -1,15 +1,15 @@
-import React, { ReactNode, Fragment } from "react";
-import Head from "next/head";
+import React, { Fragment } from 'react';
+import Head from 'next/head';
 
 /* Styles */
-import styles, { globalStyles } from "./styles";
+import styles, { globalStyles } from './styles';
 
 type Props = {
-   children?: ReactNode;
+   children?: React.ReactNode;
    title?: string;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => (
+const Layout = ({ children, title = 'This is the default title' }: Props) => (
    <Fragment>
       <Head>
          <title>{title}</title>

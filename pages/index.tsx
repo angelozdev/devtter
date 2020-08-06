@@ -1,17 +1,17 @@
-import { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from 'react';
 import {
    loginWithGitHub,
    onAuthStateChanged,
    mapUserFromFirebaseAuth
-} from "../firebase/client";
+} from '../firebase/client';
 
 /* Styles */
-import { colors } from "../styles/theme";
+import { colors } from '../styles/theme';
 
 /* Components */
-import Layout from "../components/Layout";
-import Button from "../components/Button";
-import GitHub from "../components/Icons/GitHub";
+import Layout from '../components/Layout';
+import Button from '../components/Button';
+import GitHub from '../components/Icons/GitHub';
 
 /* Interfaces */
 export interface IUser {
@@ -22,6 +22,7 @@ export interface IUser {
 
 const IndexPage = () => {
    const [user, setUser] = useState<undefined | IUser | null>(undefined);
+   const [error, setError] = useState<null | Error>(null);
 
    useEffect(() => {
       onAuthStateChanged(setUser);
@@ -34,8 +35,12 @@ const IndexPage = () => {
             const mapedUser = mapUserFromFirebaseAuth(user);
             setUser(mapedUser as IUser);
          })
-         .catch((err: Error) => console.error(err.message));
+         .catch((err: Error) => setError(err));
    };
+
+   if (error) {
+      return <h1>Opps</h1>;
+   }
 
    return (
       <Fragment>

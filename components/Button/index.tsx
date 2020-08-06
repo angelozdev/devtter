@@ -1,14 +1,14 @@
-import React, { FC, Fragment } from "react";
-import { colors } from "../../styles/theme";
+import React, { Fragment } from 'react';
+import { colors } from '../../styles/theme';
 
-type Type = "button" | "submit" | "reset";
+type Type = 'button' | 'submit' | 'reset';
 interface IProps {
    children: (JSX.Element | string)[];
    type?: Type;
    onClick?: () => any;
 }
 
-const Button: FC<IProps> = ({ children, type = "button", onClick }) => {
+const Button = ({ children, type = 'button', onClick }: IProps) => {
    return (
       <Fragment>
          <button type={type} onClick={onClick}>
