@@ -1,64 +1,63 @@
-import { Fragment, useState, useEffect } from 'react';
-import { loginWithGitHub, onAuthStateChanged, mapUserFromFirebaseAuth } from '../firebase/client';
+import { Fragment, useState, useEffect } from "react";
+import {
+   loginWithGitHub,
+   onAuthStateChanged,
+   mapUserFromFirebaseAuth
+} from "../firebase/client";
 
 /* Styles */
-import { colors } from '../styles/theme'
+import { colors } from "../styles/theme";
 
 /* Components */
-import Layout from '../components/Layout'
-import Button from '../components/Button'
-import GitHub from '../components/Icons/GitHub'
+import Layout from "../components/Layout";
+import Button from "../components/Button";
+import GitHub from "../components/Icons/GitHub";
 
 /* Interfaces */
 export interface IUser {
-   avatar  : string
-   email   : string
-   username: string
+   avatar: string;
+   email: string;
+   username: string;
 }
 
 const IndexPage = () => {
-   const [user, setUser] = useState<undefined | IUser | null>(undefined)
+   const [user, setUser] = useState<undefined | IUser | null>(undefined);
 
    useEffect(() => {
-      onAuthStateChanged(setUser)
-   }, [])
+      onAuthStateChanged(setUser);
+   }, []);
 
    const handleClick = () => {
       loginWithGitHub()
          .then(({ user }) => {
-            if(!user) return;
+            if (!user) return;
             const mapedUser = mapUserFromFirebaseAuth(user);
-            setUser(mapedUser as IUser)
+            setUser(mapedUser as IUser);
          })
-         .catch((err: Error) => console.error(err.message))
-   }
-
+         .catch((err: Error) => console.error(err.message));
+   };
 
    return (
       <Fragment>
          <Layout title="Home | devtter">
             <section className="content">
                <figure>
-                  <img src="/cpu.svg" alt="logo"/>
+                  <img src="/cpu.svg" alt="logo" />
                </figure>
                <h1>Devtter</h1>
                <h2>Talk about development with developers</h2>
-               {
-                  user === null &&
+               {user === null && (
                   <Button onClick={handleClick}>
-                     <GitHub width={16} height={16} fill="white"/>
+                     <GitHub width={16} height={16} fill="white" />
                      Login with GitHub
                   </Button>
-
-               }
-               {
-                  user && user?.avatar &&
-                     <Fragment>
-                        <p>Hi, {user.username}!</p>
-                        <img src={user.avatar} alt="avatar"/>
-                     </Fragment>
-               }
-
+               )}
+               {user && user?.avatar && (
+                  <Fragment>
+                     <p>Hi, {user.username}!</p>
+                     <img src={user.avatar} alt="avatar" />
+                  </Fragment>
+               )}
             </section>
          </Layout>
 
@@ -71,7 +70,7 @@ const IndexPage = () => {
                place-items: center;
             }
             figure {
-               margin : 0;
+               margin: 0;
                padding: 0;
                display: flex;
                justify-content: center;
@@ -94,9 +93,7 @@ const IndexPage = () => {
             }
          `}</style>
       </Fragment>
-   )
-}
+   );
+};
 
-
-
-export default IndexPage
+export default IndexPage;
