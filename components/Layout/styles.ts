@@ -16,12 +16,11 @@ export const globalStyles = css.global`
       font-family: ${fonts.base};
       background: radial-gradient(${colors.primary} 1px, transparent 1px) 1px
          1px;
-      background-color: #fff;
+      background-color: ${colors.white};
       background-size: 7px 7px;
    }
 
    img {
-      user-drag: none;
       -webkit-user-drag: none;
       user-select: none;
       -ms-user-select: none;
@@ -34,7 +33,6 @@ export default css`
    main {
       width: 100vw;
       height: 100vh;
-      padding: 1em;
       margin-right: auto;
       margin-left: auto;
       background-color: #fff;
@@ -47,7 +45,7 @@ export default css`
          box-shadow: 0px 7px 14px 1px rgba(0, 0, 0, 0.15);
          width: 100%;
          height: 90vh;
-         border-radius: 1em;
+         border-radius: 1rem;
       }
    }
 `;
