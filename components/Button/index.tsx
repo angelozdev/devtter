@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { colors } from '../../styles/theme';
+import { colors } from 'styles/theme';
 
 type Type = 'button' | 'submit' | 'reset';
 interface IProps {

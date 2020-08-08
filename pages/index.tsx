@@ -1,17 +1,20 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import Link from 'next/link';
 import {
    loginWithGitHub,
    onAuthStateChanged,
    mapUserFromFirebaseAuth
-} from '../firebase/client';
+} from 'firebase/client';
 
 /* Styles */
-import { colors, breakpoints } from '../styles/theme';
+import { colors, breakpoints } from 'styles/theme';
 
 /* Components */
-import Layout from '../components/Layout';
-import Button from '../components/Button';
-import GitHub from '../components/Icons/GitHub';
+import Layout from 'components/Layout';
+import Button from 'components/Button';
+import GitHub from 'components/Icons/GitHub';
+import Avatar from 'components/Avatar';
+import Logo from 'components/Icons/Logo';
 
 /* Interfaces */
 export interface IUser {
@@ -39,15 +42,21 @@ const IndexPage = () => {
    };
 
    if (error) {
+      console.error(error);
       return <h1>Opps</h1>;
    }
 
    return (
       <Fragment>
-         <Layout title="Home | devtter">
+         <Layout title="Devtter: A social network for developers">
             <section className="content">
                <figure>
-                  <img src="/logo-white.svg" alt="logo" />
+                  <Logo
+                     fill={colors.primary}
+                     stroke={colors.white}
+                     width="120"
+                     height="120"
+                  />
                </figure>
                <h1>Devtter</h1>
                <h2>Talk about development with developers</h2>
@@ -57,11 +66,16 @@ const IndexPage = () => {
                      Login with GitHub
                   </Button>
                )}
-               {user && user?.avatar && (
-                  <Fragment>
-                     <p>Hi, {user.username}!</p>
-                     <img src={user.avatar} alt="avatar" />
-                  </Fragment>
+               {user?.avatar && (
+                  <Link href="/home">
+                     <a>
+                        <Avatar
+                           src={user?.avatar}
+                           alt={`Avatar: ${user?.username}`}
+                           username={user.username}
+                        />
+                     </a>
+                  </Link>
                )}
             </section>
          </Layout>
@@ -76,17 +90,12 @@ const IndexPage = () => {
                color: ${colors.white};
                background-color: ${colors.primary};
             }
+
             figure {
-               margin: 0;
+               margin: -3rem 0 3rem 0;
                padding: 0;
                display: flex;
                justify-content: center;
-            }
-            img {
-               width: 120px;
-               border-radius: 50%;
-               padding: 0.2rem;
-               border: 1px solid ${colors.white};
             }
 
             h1 {
@@ -95,6 +104,7 @@ const IndexPage = () => {
                font-weight: 400;
                color: ${colors.white};
             }
+
             h2 {
                font-weight: 300;
                font-size: 1.2rem;

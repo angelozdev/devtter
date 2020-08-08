@@ -1,9 +1,14 @@
 import css from 'styled-jsx/css';
-import { colors, breakpoints, fonts } from '../../styles/theme';
+import { colors, breakpoints, fonts } from 'styles/theme';
 
 export const globalStyles = css.global`
    * {
       box-sizing: border-box;
+   }
+
+   a {
+      color: ${colors.white};
+      text-decoration: none;
    }
 
    body {
@@ -14,10 +19,9 @@ export const globalStyles = css.global`
       display: grid;
       place-items: center;
       font-family: ${fonts.base};
-      background: radial-gradient(${colors.primary} 1px, transparent 1px) 1px
-         1px;
+      background: radial-gradient(${colors.primaryLight} 1px, transparent 1px);
       background-color: ${colors.white};
-      background-size: 7px 7px;
+      background-size: 20px 20px;
    }
 
    img {
