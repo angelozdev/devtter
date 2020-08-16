@@ -34,6 +34,8 @@ const Avatar: React.FC<IProps> = ({
 
             img {
                width: ${width};
+               height: ${width};
+               background-color: ${colors.darkGray};
                border-radius: 50%;
                padding: 1px;
                border: 1px solid ${borderColor};

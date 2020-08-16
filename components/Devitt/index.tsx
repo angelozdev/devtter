@@ -24,7 +24,7 @@ const Devitt: React.FC<IProps> = ({
             <Avatar src={avatar} alt={username} />
             <div className="devitt">
                <strong>{name}</strong>
-               <span>@{username}</span>
+               <span>@{username.split('@')[0]}</span>
                <p>{message}</p>
             </div>
          </article>
@@ -33,7 +33,7 @@ const Devitt: React.FC<IProps> = ({
                padding: 0.6rem 1rem;
                display: flex;
                align-items: start;
-               border-bottom: 1px solid ${colors.gray};
+               border-bottom: 1px solid ${colors.darkGray};
             }
 
             .devitt {

@@ -1,10 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import Link from 'next/link';
-import {
-   loginWithGitHub,
-   onAuthStateChanged,
-   mapUserFromFirebaseAuth
-} from 'firebase/client';
+import { useRouter } from 'next/router';
+import { loginWithGitHub } from 'firebase/client';
 
 /* Styles */
 import { colors, breakpoints } from 'styles/theme';
@@ -13,38 +9,24 @@ import { colors, breakpoints } from 'styles/theme';
 import Layout from 'components/Layout';
 import Button from 'components/Button';
 import GitHub from 'components/Icons/GitHub';
-import Avatar from 'components/Avatar';
 import Logo from 'components/Icons/Logo';
+import Spinner from 'components/Spinner';
 
-/* Interfaces */
-export interface IUser {
-   avatar: string;
-   email: string;
-   username: string;
-}
+/* Hooks */
+import useUser, { USER_STATES } from 'hooks/useUser';
 
 const IndexPage = () => {
-   const [user, setUser] = useState<undefined | IUser | null>(undefined);
    const [error, setError] = useState<null | Error>(null);
+   const { user, loading } = useUser();
+   const router = useRouter();
 
    useEffect(() => {
-      onAuthStateChanged(setUser);
-   }, []);
+      user && router.replace('/home');
+   }, [user]);
 
    const handleClick = () => {
-      loginWithGitHub()
-         .then(({ user }) => {
-            if (!user) return;
-            const mapedUser = mapUserFromFirebaseAuth(user);
-            setUser(mapedUser as IUser);
-         })
-         .catch((err: Error) => setError(err));
+      loginWithGitHub().catch((err: Error) => setError(err));
    };
-
-   if (error) {
-      console.error(error);
-      return <h1>Opps</h1>;
-   }
 
    return (
       <Fragment>
@@ -52,7 +34,7 @@ const IndexPage = () => {
             <section className="content">
                <figure>
                   <Logo
-                     fill={colors.primary}
+                     fill={colors.Lightblack}
                      stroke={colors.white}
                      width="120"
                      height="120"
@@ -60,22 +42,17 @@ const IndexPage = () => {
                </figure>
                <h1>Devtter</h1>
                <h2>Talk about development with developers</h2>
-               {user === null && (
+               {loading && <Spinner />}
+               {user === USER_STATES.NOT_LOGGED && (
                   <Button onClick={handleClick}>
                      <GitHub width={16} height={16} fill="white" />
                      Login with GitHub
                   </Button>
                )}
-               {user?.avatar && (
-                  <Link href="/home">
-                     <a>
-                        <Avatar
-                           src={user?.avatar}
-                           alt={`Avatar: ${user?.username}`}
-                           username={user.username}
-                        />
-                     </a>
-                  </Link>
+               {error && (
+                  <div className="error">
+                     {error.name}: {error.message}
+                  </div>
                )}
             </section>
          </Layout>
@@ -88,7 +65,7 @@ const IndexPage = () => {
                place-content: center;
                place-items: center;
                color: ${colors.white};
-               background-color: ${colors.primary};
+               background-color: ${colors.Lightblack};
             }
 
             figure {
@@ -111,6 +88,14 @@ const IndexPage = () => {
                margin-top: 0;
                text-align: center;
                color: ${colors.gray};
+            }
+
+            .error {
+               border: 1px solid ${colors.darkGray};
+               padding: 0.6rem;
+               color: brown;
+               margin-top: 1rem;
+               text-align: center;
             }
 
             @media (min-width: ${breakpoints.mobileL}) {

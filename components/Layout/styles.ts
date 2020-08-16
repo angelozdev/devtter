@@ -19,17 +19,25 @@ export const globalStyles = css.global`
       display: grid;
       place-items: center;
       font-family: ${fonts.base};
-      background: radial-gradient(${colors.primaryLight} 1px, transparent 1px);
+      background: radial-gradient(${colors.Lightblack} 1px, transparent 1px);
       background-color: ${colors.white};
       background-size: 20px 20px;
    }
 
-   img {
+   img,
+   svg,
+   a,
+   button {
       -webkit-user-drag: none;
       user-select: none;
       -ms-user-select: none;
       -moz-user-select: none;
       -webkit-user-select: none;
+   }
+   textarea::-webkit-input-placeholder,
+   textarea,
+   input {
+      font-family: ${fonts.base};
    }
 `;
 
@@ -48,6 +56,7 @@ export default css`
          -moz-box-shadow: 0px 7px 14px 1px rgba(0, 0, 0, 0.15);
          box-shadow: 0px 7px 14px 1px rgba(0, 0, 0, 0.15);
          width: 100%;
+         min-width: 425px;
          height: 90vh;
          border-radius: 1rem;
       }

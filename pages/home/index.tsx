@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 
 /* Styles */
 import styles from './styles';
@@ -6,25 +6,38 @@ import styles from './styles';
 /* Components */
 import Layout from 'components/Layout';
 import Devitt from 'components/Devitt';
-// eslint-disable-next-line no-unused-vars
-import IDevitt from 'interfaces/devitt';
+import useUser from 'hooks/useUser';
+import FloatingButton from 'components/FloatingButton';
+import Pen from 'components/Icons/Pen';
+import { colors } from 'styles/theme';
+import { getLastDeveets } from 'firebase/client';
+import Spinner from 'components/Spinner';
 
 const Home = () => {
-   const [timeline, setTimeline] = useState<Array<IDevitt>>([]);
-
+   const { user } = useUser();
+   const [loading, setLoading] = useState(true);
+   const [timeline, setTimeline] = useState<Array<any>>([]);
+   const el = useRef<HTMLDivElement>(null);
    useEffect(() => {
-      fetch('http://localhost:3000/api/statuses/home_timeline')
-         .then((response) => response.json())
-         .then((data) => setTimeline(data));
-   }, []);
+      setLoading(true);
+      user &&
+         getLastDeveets().then((deveets) => {
+            setTimeline(deveets);
+            setLoading(false);
+         });
+   }, [user]);
+
    return (
       <Fragment>
          <Layout title="Inicio / Devtter">
-            <div className="content">
+            <div className="content" ref={el}>
                <header>
-                  <h2>Inicio</h2>
+                  <a onClick={() => el.current?.scrollTo(0, 0)}>
+                     <h2>Inicio</h2>
+                  </a>
                </header>
                <section>
+                  {loading && <Spinner />}
                   {timeline.map(({ avatar, id, username, message, name }) => (
                      <Devitt
                         id={id}
@@ -36,6 +49,14 @@ const Home = () => {
                      />
                   ))}
                </section>
+               <FloatingButton to="/compose/deveet">
+                  <Pen
+                     width="21"
+                     height="21"
+                     fill={colors.white}
+                     stroke={colors.white}
+                  />
+               </FloatingButton>
                <nav></nav>
             </div>
          </Layout>

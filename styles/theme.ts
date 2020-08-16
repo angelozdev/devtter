@@ -4,12 +4,12 @@ export const fonts = {
 };
 
 export const colors = {
-   black: '#060914',
-   blackLight: '#3d475c',
-   primary: '#15202b',
-   primaryLight: '#5b7bb0',
-   white: '#fff',
-   gray: '#6a6f81'
+   black: '#1b1d23',
+   Lightblack: '#24292e',
+   darkGray: '#31363f',
+   gray: '#9da5b4',
+   white: '#d6d8da',
+   primary: '#479bfc'
 };
 
 export const breakpoints = {

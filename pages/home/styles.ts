@@ -4,28 +4,26 @@ import { breakpoints, colors } from 'styles/theme';
 export default css`
    .content {
       width: 100%;
+      height: 100%;
       max-width: 425px;
       min-height: calc(90vh - 49px - 49px);
-      position: relative;
       padding-top: 0;
       padding-bottom: 0;
-      height: 100%;
       color: ${colors.white};
-      background-color: ${colors.primary};
+      background-color: ${colors.Lightblack};
       overflow-y: scroll;
+      scroll-behavior: smooth;
+   }
+
+   section {
+      min-height: calc(100% - 49px - 49px);
    }
 
    header {
-      background-color: ${colors.primary};
       display: flex;
       align-items: center;
-      width: 100%;
-      height: 49px;
-      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      border-bottom: 1px solid ${colors.gray};
+      border-bottom: 1px solid ${colors.darkGray};
    }
 
    header h2 {
@@ -36,14 +34,20 @@ export default css`
       margin-left: 2rem;
    }
 
-   nav {
+   nav,
+   header {
       position: sticky;
-      bottom: 0;
       left: 0;
       right: 0;
       height: 49px;
-      border-top: 1px solid ${colors.gray};
-      background-color: ${colors.primary};
+      width: 100%;
+      backdrop-filter: blur(3px);
+      background-color: ${colors.Lightblack}ee;
+   }
+
+   nav {
+      bottom: 0;
+      border-top: 1px solid ${colors.darkGray};
    }
 
    @media (min-width: ${breakpoints.mobileL}) {
