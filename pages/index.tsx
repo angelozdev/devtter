@@ -28,6 +28,10 @@ const IndexPage = () => {
       loginWithGitHub().catch((err: Error) => setError(err));
    };
 
+   const hola = () => {
+      router.replace('/home');
+   };
+
    return (
       <Fragment>
          <Layout title="Devtter: A social network for developers">
@@ -54,6 +58,7 @@ const IndexPage = () => {
                      {error.name}: {error.message}
                   </div>
                )}
+               <button onClick={hola}>Entrar</button>
             </section>
          </Layout>
 

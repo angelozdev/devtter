@@ -18,6 +18,7 @@ const Spinner: React.FC = () => {
                left: 0;
                right: 0;
                background-color: ${colors.Lightblack};
+               z-index: 10;
             }
             .lds-hourglass {
                display: inline-block;
