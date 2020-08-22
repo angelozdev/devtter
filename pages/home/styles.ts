@@ -32,6 +32,7 @@ export default css`
       font-weight: 800;
       font-size: 1rem;
       margin-left: 2rem;
+      cursor: pointer;
    }
 
    nav,
@@ -48,6 +49,27 @@ export default css`
    nav {
       bottom: 0;
       border-top: 1px solid ${colors.darkGray};
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+   }
+
+   nav a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      transition: all ease 200ms;
+   }
+
+   nav a:hover {
+      background-color: ${colors.primary}0f;
+   }
+
+   nav a:hover > :global(svg) {
+      stroke: ${colors.primary};
    }
 
    @media (min-width: ${breakpoints.mobileL}) {

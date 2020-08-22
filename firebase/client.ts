@@ -19,7 +19,6 @@ export const mapUserFromFirebaseAuth = (
    user: firebase.User | null | undefined
 ) => {
    if (!user) return null;
-   console.log(user);
    const { email, photoURL, displayName } = user;
    return { avatar: photoURL, email, name: displayName, username: email };
 };
@@ -64,12 +63,16 @@ export const addDeveet = ({
 export const getLastDeveets = () => {
    return db
       .collection('deveets')
+      .orderBy('createAt', 'desc')
       .get()
       .then(({ docs }) =>
          docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
-            return { ...data, id };
+            const { createAt } = data;
+            const date = +createAt.toDate();
+
+            return { ...data, id, createAt: date };
          })
       );
 };

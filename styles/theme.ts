@@ -9,7 +9,8 @@ export const colors = {
    darkGray: '#31363f',
    gray: '#9da5b4',
    white: '#d6d8da',
-   primary: '#479bfc'
+   primary: '#479bfc',
+   LightPrimary: '#b9dcff'
 };
 
 export const breakpoints = {

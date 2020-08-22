@@ -38,7 +38,7 @@ const Button = ({
                cursor: pointer;
                font-size: 1em;
                font-weight: bold;
-               transition: opacity 0.3s ease;
+               transition: opacity 200ms ease;
                -webkit-tap-highlight-color: transparent;
             }
 
