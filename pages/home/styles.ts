@@ -44,6 +44,7 @@ export default css`
       width: 100%;
       backdrop-filter: blur(3px);
       background-color: ${colors.Lightblack}ee;
+      z-index: 10;
    }
 
    nav {

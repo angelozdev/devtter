@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
+import React, { Fragment, useState, useEffect, useRef, FC } from 'react';
 import Link from 'next/link';
 import { getLastDeveets } from 'firebase/client';
 import useUser from 'hooks/useUser';
@@ -20,11 +20,12 @@ import NotificationIcon from 'components/Icons/Notification';
 import SearchIcon from 'components/Icons/Search';
 import Message from 'components/Icons/Inbox';
 
-const Home = () => {
+const Home: FC = (): JSX.Element => {
    const { user } = useUser();
    const [loading, setLoading] = useState(true);
    const [timeline, setTimeline] = useState<Array<any>>([]);
    const el = useRef<HTMLDivElement>(null);
+
    useEffect(() => {
       setLoading(true);
       user &&
@@ -50,7 +51,15 @@ const Home = () => {
                <section>
                   {loading && <Spinner />}
                   {timeline.map(
-                     ({ avatar, id, username, message, name, createAt }) => (
+                     ({
+                        avatar,
+                        id,
+                        username,
+                        message,
+                        name,
+                        createAt,
+                        img
+                     }) => (
                         <Devitt
                            id={id}
                            avatar={avatar}
@@ -59,6 +68,7 @@ const Home = () => {
                            message={message}
                            name={name}
                            createAt={createAt}
+                           img={img}
                         />
                      )
                   )}

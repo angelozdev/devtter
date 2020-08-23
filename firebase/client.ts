@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase, { firestore } from 'firebase';
 
 const firebaseConfig = {
    apiKey: 'AIzaSyDy8iAiEEl8ExeyP6mdXqM55S0dnpG9HuM',
@@ -14,10 +14,17 @@ const firebaseConfig = {
 
 const db = firebase.firestore();
 
+interface IUser {
+   avatar: string | null;
+   email: string | null;
+   name: string | null;
+   username: string | null;
+}
+
 /* Map User */
 export const mapUserFromFirebaseAuth = (
    user: firebase.User | null | undefined
-) => {
+): IUser | null => {
    if (!user) return null;
    const { email, photoURL, displayName } = user;
    return { avatar: photoURL, email, name: displayName, username: email };
@@ -25,7 +32,9 @@ export const mapUserFromFirebaseAuth = (
 
 /* when the state changed */
 /* Esto sucede automáticamente al hacer el loginWithGitHub */
-export const onAuthStateChanged = (setUser: React.SetStateAction<any>) => {
+export const onAuthStateChanged = (
+   setUser: React.SetStateAction<any>
+): firebase.Unsubscribe => {
    return firebase.auth().onAuthStateChanged((user) => {
       if (!user) return setUser(null);
       setUser(mapUserFromFirebaseAuth(user));
@@ -33,7 +42,9 @@ export const onAuthStateChanged = (setUser: React.SetStateAction<any>) => {
 };
 
 /* Login with GitHub */
-export const loginWithGitHub = async () => {
+export const loginWithGitHub = async (): Promise<
+   firebase.auth.UserCredential
+> => {
    const githubProvider = new firebase.auth.GithubAuthProvider();
    return firebase.auth().signInWithPopup(githubProvider);
 };
@@ -42,13 +53,15 @@ export const addDeveet = ({
    avatar,
    username,
    message,
-   name
+   name,
+   img
 }: {
    avatar: string;
    username: string;
    message: string;
    name: string;
-}) => {
+   img: string | null;
+}): Promise<firebase.firestore.DocumentReference<firestore.DocumentData>> => {
    return db.collection('deveets').add({
       avatar,
       username,
@@ -56,11 +69,14 @@ export const addDeveet = ({
       createAt: firebase.firestore.Timestamp.fromDate(new Date()),
       likesCount: 0,
       sharedCount: 0,
-      name
+      name,
+      img
    });
 };
 
-export const getLastDeveets = () => {
+export const getLastDeveets = (): Promise<
+   { id: string; createAt: number }[]
+> => {
    return db
       .collection('deveets')
       .orderBy('createAt', 'desc')
@@ -75,4 +91,12 @@ export const getLastDeveets = () => {
             return { ...data, id, createAt: date };
          })
       );
+};
+
+export const uploadImage = (file: File): firebase.storage.UploadTask => {
+   const ref = firebase.storage().ref(`images/${file.name}`);
+
+   const task = ref.put(file);
+
+   return task;
 };

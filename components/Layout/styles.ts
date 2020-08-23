@@ -28,6 +28,7 @@ export const globalStyles = css.global`
    svg,
    a,
    button {
+      -webkit-tap-highlight-color: transparent;
       -webkit-user-drag: none;
       user-select: none;
       -ms-user-select: none;
