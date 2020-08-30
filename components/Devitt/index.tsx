@@ -1,34 +1,38 @@
 import React, { Fragment } from 'react';
+import IDevitt from 'interfaces/devitt';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 /* components */
 import Avatar from 'components/Avatar';
-import { colors } from 'styles/theme';
+
+/* Styles */
+import { animations, colors } from 'style/theme';
+
+/* Hooks */
 import useTimeago from 'hooks/useTimeago';
 
-interface IProps {
-   avatar: string;
-   username: string;
-   message: string;
-   id: string;
-   name: string;
-   createAt: number;
-   img: string | null;
-}
-
-const Devitt: React.FC<IProps> = ({
+const Devitt = ({
    avatar,
    username,
    message,
    name,
    createAt,
-   img
-}: IProps) => {
-   const timeago = useTimeago(createAt);
+   img,
+   id
+}: IDevitt): JSX.Element => {
+   const timeago = useTimeago(createAt || 900000);
+   const router = useRouter();
+
+   const handleArticleClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      router.push('/status/[id]', `/status/${id}`);
+   };
 
    return (
       <Fragment>
-         <article>
-            <Avatar src={avatar} alt={username} />
+         <article className="devitt-container" onClick={handleArticleClick}>
+            <Avatar src={avatar} alt={username || 'username'} />
             <div className="devitt">
                <strong>{name}</strong>
                <span className="username">@{username}</span>
@@ -40,26 +44,40 @@ const Devitt: React.FC<IProps> = ({
                      </figure>
                   </a>
                )}
-               <span className="timeago">{timeago}</span>
+               <Link href={`/status/[id]`} as={`/status/${id}`}>
+                  <a className="devitt__time">
+                     <time className="timeago">{timeago}</time>
+                  </a>
+               </Link>
             </div>
          </article>
          <style jsx>{`
-            article {
+            .devitt-container {
                padding: 0.6rem 1rem;
                display: flex;
                align-items: start;
                border-bottom: 1px solid ${colors.darkGray};
+               transition: all ${animations.transition};
+            }
+
+            .devitt-container:hover {
+               background-color: ${colors.darkGray};
+               cursor: pointer;
             }
 
             .devitt {
                margin-left: 0.6rem;
+            }
+            .devitt__time:hover time {
+               text-decoration: underline;
             }
 
             .devitt .username {
                margin-left: 0.3rem;
             }
 
-            .devitt span {
+            .devitt span,
+            time {
                display: inline-block;
                font-weight: 200;
                color: ${colors.gray};

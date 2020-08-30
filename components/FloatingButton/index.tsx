@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from 'styles/theme';
+import { colors } from 'style/theme';
 import Link from 'next/link';
 
 type Props = { children: JSX.Element | string; to: string };

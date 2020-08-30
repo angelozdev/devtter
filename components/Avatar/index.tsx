@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 /* Styles */
-import { colors } from 'styles/theme';
+import { colors } from 'style/theme';
 
 interface IProps {
    src: string | undefined;

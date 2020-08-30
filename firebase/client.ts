@@ -1,4 +1,6 @@
 import firebase, { firestore } from 'firebase';
+import IDevitt from 'interfaces/devitt';
+import { IUser } from 'interfaces/user';
 
 const firebaseConfig = {
    apiKey: 'AIzaSyDy8iAiEEl8ExeyP6mdXqM55S0dnpG9HuM',
@@ -13,13 +15,6 @@ const firebaseConfig = {
 !firebase.apps.length && firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
-
-interface IUser {
-   avatar: string | null;
-   email: string | null;
-   name: string | null;
-   username: string | null;
-}
 
 /* Map User */
 export const mapUserFromFirebaseAuth = (
@@ -55,13 +50,9 @@ export const addDeveet = ({
    message,
    name,
    img
-}: {
-   avatar: string;
-   username: string;
-   message: string;
-   name: string;
-   img: string | null;
-}): Promise<firebase.firestore.DocumentReference<firestore.DocumentData>> => {
+}: IDevitt): Promise<
+   firebase.firestore.DocumentReference<firestore.DocumentData>
+> => {
    return db.collection('deveets').add({
       avatar,
       username,

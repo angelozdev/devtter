@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from 'styles/theme';
+import { colors } from 'style/theme';
 
 const Spinner: React.FC = () => {
    return (

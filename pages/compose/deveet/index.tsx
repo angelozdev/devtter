@@ -1,9 +1,8 @@
-import React, { useState, DragEvent, useEffect } from 'react';
+import React, { useState, DragEvent, useEffect, Fragment } from 'react';
 import Link from 'next/link';
-import { colors } from 'styles/theme';
+import { colors } from 'style/theme';
 
 /* Components */
-import Layout from 'components/Layout';
 import ArrowLeft from 'components/Icons/ArrowLeft';
 import Button from 'components/Button';
 import Avatar from 'components/Avatar';
@@ -67,10 +66,10 @@ const Deveet: React.FC = (): JSX.Element => {
       setLoadingSendDeveet(true);
       if (!user) return;
       addDeveet({
-         avatar: user?.avatar,
-         username: user?.username,
+         avatar: user?.avatar || '',
+         username: user?.username || '',
          message,
-         name: user?.name,
+         name: user?.name || '',
          img: imgURL
       })
          .then(() => {
@@ -80,7 +79,7 @@ const Deveet: React.FC = (): JSX.Element => {
    };
 
    return (
-      <Layout title="Post a new Deveet / Devtter">
+      <Fragment>
          {loading && <Spinner />}
          <div className="content">
             <header>
@@ -103,7 +102,10 @@ const Deveet: React.FC = (): JSX.Element => {
             </header>
             <section>
                <div className="container-avatar">
-                  <Avatar src={user?.avatar} alt={`avatar ${user?.name}`} />
+                  <Avatar
+                     src={user?.avatar || ''}
+                     alt={`avatar ${user?.name}`}
+                  />
                </div>
                <div className="container-devitt">
                   <textarea
@@ -219,7 +221,7 @@ const Deveet: React.FC = (): JSX.Element => {
                line-height: 20px;
             }
          `}</style>
-      </Layout>
+      </Fragment>
    );
 };
 

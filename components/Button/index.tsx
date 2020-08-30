@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { colors } from 'styles/theme';
+import { animations, colors } from 'style/theme';
 
 type Type = 'button' | 'submit' | 'reset';
 interface IProps {
@@ -7,7 +7,7 @@ interface IProps {
    type?: Type;
    bgColor?: string;
    color?: string;
-   onClick?: () => any;
+   onClick?: () => void;
    disabled?: boolean;
 }
 
@@ -18,7 +18,7 @@ const Button = ({
    bgColor = colors.black,
    color = colors.white,
    disabled = false
-}: IProps) => {
+}: IProps): JSX.Element => {
    return (
       <Fragment>
          <button disabled={disabled} type={type} onClick={onClick}>
@@ -38,7 +38,7 @@ const Button = ({
                cursor: pointer;
                font-size: 1em;
                font-weight: bold;
-               transition: opacity 200ms ease;
+               transition: opacity ${animations.transition};
                -webkit-tap-highlight-color: transparent;
             }
 

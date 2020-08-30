@@ -16,3 +16,7 @@ export const colors = {
 export const breakpoints = {
    mobileL: '425px'
 };
+
+export const animations = {
+   transition: 'ease 200ms'
+};

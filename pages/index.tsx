@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 import { loginWithGitHub } from 'firebase/client';
 
 /* Styles */
-import { colors, breakpoints } from 'styles/theme';
+import { colors, breakpoints } from 'style/theme';
 
 /* Components */
-import Layout from 'components/Layout';
 import Button from 'components/Button';
 import GitHub from 'components/Icons/GitHub';
 import Logo from 'components/Icons/Logo';
@@ -15,7 +14,7 @@ import Spinner from 'components/Spinner';
 /* Hooks */
 import useUser, { USER_STATES } from 'hooks/useUser';
 
-const IndexPage = () => {
+const IndexPage = (): JSX.Element => {
    const [error, setError] = useState<null | Error>(null);
    const { user, loading } = useUser();
    const router = useRouter();
@@ -30,32 +29,30 @@ const IndexPage = () => {
 
    return (
       <Fragment>
-         <Layout title="Devtter: A social network for developers">
-            <section className="content">
-               <figure>
-                  <Logo
-                     fill={colors.Lightblack}
-                     stroke={colors.white}
-                     width="120"
-                     height="120"
-                  />
-               </figure>
-               <h1>Devtter</h1>
-               <h2>Talk about development with developers</h2>
-               {loading && <Spinner />}
-               {user === USER_STATES.NOT_LOGGED && (
-                  <Button onClick={handleClick}>
-                     <GitHub width={16} height={16} fill="white" />
-                     Login with GitHub
-                  </Button>
-               )}
-               {error && (
-                  <div className="error">
-                     {error.name}: {error.message}
-                  </div>
-               )}
-            </section>
-         </Layout>
+         <section className="content">
+            <figure>
+               <Logo
+                  fill={colors.Lightblack}
+                  stroke={colors.white}
+                  width="120"
+                  height="120"
+               />
+            </figure>
+            <h1>Devtter</h1>
+            <h2>Talk about development with developers</h2>
+            {loading && <Spinner />}
+            {user === USER_STATES.NOT_LOGGED && (
+               <Button onClick={handleClick}>
+                  <GitHub width={16} height={16} fill="white" />
+                  Login with GitHub
+               </Button>
+            )}
+            {error && (
+               <div className="error">
+                  {error.name}: {error.message}
+               </div>
+            )}
+         </section>
 
          <style jsx>{`
             .content {

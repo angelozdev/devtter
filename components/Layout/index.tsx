@@ -9,7 +9,10 @@ type Props = {
    title?: string;
 };
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+const Layout = ({
+   children,
+   title = 'Devtter / Your social network if you are developer'
+}: Props): JSX.Element => (
    <Fragment>
       <Head>
          <title>{title}</title>
