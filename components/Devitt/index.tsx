@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import IDevitt from 'interfaces/devitt';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import format from 'date-fns/format';
 /* components */
 import Avatar from 'components/Avatar';
 
@@ -46,7 +46,12 @@ const Devitt = ({
                )}
                <Link href={`/status/[id]`} as={`/status/${id}`}>
                   <a className="devitt__time">
-                     <time className="timeago">{timeago}</time>
+                     <time
+                        title={format(createAt || new Date(), 'PPPPp')}
+                        className="timeago"
+                     >
+                        {timeago}
+                     </time>
                   </a>
                </Link>
             </div>

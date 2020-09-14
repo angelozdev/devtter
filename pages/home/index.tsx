@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef, FC } from 'react';
 import Link from 'next/link';
-import { getLastDeveets } from 'firebase/client';
+import { listenLatestDevits } from 'firebase/client';
 import useUser from 'hooks/useUser';
 
 /* Styles */
@@ -26,11 +26,14 @@ const Home: FC = (): JSX.Element => {
 
    useEffect(() => {
       setLoading(true);
-      user &&
-         getLastDeveets().then((deveets) => {
-            setTimeline(deveets);
-            setLoading(false);
-         });
+      let unsubscribe: () => void;
+
+      if (user) {
+         unsubscribe = listenLatestDevits(setTimeline);
+      }
+
+      setLoading(false);
+      return () => unsubscribe && unsubscribe();
    }, [user]);
 
    const scrollTop = () => {

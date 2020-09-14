@@ -2,6 +2,8 @@ import firebase, { firestore } from 'firebase';
 import IDevitt from 'interfaces/devitt';
 import { IUser } from 'interfaces/user';
 
+type Doc = firestore.QueryDocumentSnapshot<firestore.DocumentData>;
+
 const firebaseConfig = {
    apiKey: 'AIzaSyDy8iAiEEl8ExeyP6mdXqM55S0dnpG9HuM',
    authDomain: 'angelozdev-devtter.firebaseapp.com',
@@ -50,9 +52,7 @@ export const addDeveet = ({
    message,
    name,
    img
-}: IDevitt): Promise<
-   firebase.firestore.DocumentReference<firestore.DocumentData>
-> => {
+}: IDevitt): Promise<firestore.DocumentReference<firestore.DocumentData>> => {
    return db.collection('deveets').add({
       avatar,
       username,
@@ -65,6 +65,28 @@ export const addDeveet = ({
    });
 };
 
+const mapDevitFromFirebaseToDevitObject = (doc: Doc) => {
+   const data = doc.data();
+   const id = doc.id;
+   const { createAt } = data;
+   const date = +createAt.toDate();
+
+   return { ...data, id, createAt: date };
+};
+
+export const listenLatestDevits = (
+   callback: (docs: Array<{ id: string; createAt: number }>) => void
+): (() => void) => {
+   return db
+      .collection('deveets')
+      .limit(20)
+      .orderBy('createAt', 'desc')
+      .onSnapshot(({ docs }) => {
+         const newDocs = docs.map(mapDevitFromFirebaseToDevitObject);
+         callback(newDocs);
+      });
+};
+
 export const getLastDeveets = (): Promise<
    { id: string; createAt: number }[]
 > => {
@@ -72,16 +94,7 @@ export const getLastDeveets = (): Promise<
       .collection('deveets')
       .orderBy('createAt', 'desc')
       .get()
-      .then(({ docs }) =>
-         docs.map((doc) => {
-            const data = doc.data();
-            const id = doc.id;
-            const { createAt } = data;
-            const date = +createAt.toDate();
-
-            return { ...data, id, createAt: date };
-         })
-      );
+      .then(({ docs }) => docs.map(mapDevitFromFirebaseToDevitObject));
 };
 
 export const uploadImage = (file: File): firebase.storage.UploadTask => {

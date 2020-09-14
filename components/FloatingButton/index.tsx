@@ -23,6 +23,7 @@ const FloatingButton: React.FC<Props> = ({ children, to }: Props) => {
                outline: none;
                box-shadow: rgba(136, 153, 166, 0.2) 0px 0px 10px,
                   rgba(136, 153, 166, 0.25) 0px 1px 3px 1px;
+               cursor: pointer;
             }
          `}</style>
       </>

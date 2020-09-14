@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const admin = require('firebase-admin');
-
-const serviceAccount = require('./angelozdev-devtter-firebase-adminsdk-aaypd-0ab294d4d6.json');
+import config from 'config';
+import admin from 'firebase-admin';
 
 if (!admin.apps.length) {
    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      databaseURL: 'https://angelozdev-devtter.firebaseio.com'
+      credential: admin.credential.cert(
+         JSON.parse(config.FIREBASE_CREDENTIALS || '')
+      ),
+      databaseURL: config.FIREBASE_DB_URL
    });
 }
 

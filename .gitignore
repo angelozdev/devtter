@@ -119,6 +119,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -198,3 +199,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,node,now,react
+angelozdev-devtter-firebase-adminsdk-aaypd-ccf0fccab7.json
