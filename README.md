@@ -1,63 +1,47 @@
-# TypeScript Next.js example
+# Devtter
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
-![](./screenshot.png)
+_Devtter is a twitter clone for developers._
 
-## Deploy your own
+## Starting
 
-Deploy the example using [Vercel](https://vercel.com):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/with-typescript)
-
-## How to use it?
-
-### Using `create-next-app`
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+_You can clone this repository to have the project local:_
 
 ```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
+git clone https://github.com/angelozdev/devtter.git
 ```
 
-### Download manually
-
-Download the example:
-
-```bash
-curl https://codeload.github.com/vercel/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-typescript
-cd with-typescript
-```
-
-Install it and run:
+_Install the necessary dependencies in the root of the project._
 
 ```bash
 npm install
-npm run dev
-# or
-yarn
-yarn dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+_Run the following command to start the project in development mode:_
 
-## Notes
-
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
-
-```
-npm install --save-dev typescript
+```bash
+npm start
 ```
 
-To enable TypeScript's features, we install the type declarations for React and Node.
+## Preview
 
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
+<img src="./screenshot.png" width="40%" />
 
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
+## Built with
 
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
+_Technologies used in the frontend.:_
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+-  **Next.js** gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed.
+-  **ReactJS** A JavaScript library for building user interfaces.
+-  **Styled JSX** Full, scoped and component-friendly CSS support for JSX (rendered on the server or the client).
+-  **TypeScript** is an open-source language which builds on JavaScript, one of the world’s most used tools, by adding static type definitions.
+-  **React Router Dom** DOM bindings for [React Router](https://reacttraining.com/react-router).
+-  **ESLint** A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript.
+-  **Prettier** An opinionated code formatter; Supports many languages; Integrates with most editors.
+-  **Husky** can prevent bad git commit, git push and more.
+-  **Webpack** is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
+-  **Babel** is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments.
+
+
+## License
+
+This project is under the License (MIT) - see the file [LICENSE.md](LICENSE.md) for details
