@@ -34,7 +34,6 @@ _Technologies used in the frontend.:_
 -  **ReactJS** A JavaScript library for building user interfaces.
 -  **Styled JSX** Full, scoped and component-friendly CSS support for JSX (rendered on the server or the client).
 -  **TypeScript** is an open-source language which builds on JavaScript, one of the world’s most used tools, by adding static type definitions.
--  **React Router Dom** DOM bindings for [React Router](https://reacttraining.com/react-router).
 -  **ESLint** A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript.
 -  **Prettier** An opinionated code formatter; Supports many languages; Integrates with most editors.
 -  **Husky** can prevent bad git commit, git push and more.
