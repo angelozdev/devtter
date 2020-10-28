@@ -22,6 +22,11 @@ _Run the following command to start the project in development mode:_
 npm start
 ```
 
+## Deploy
+
+You can see the project in production [Devtter](https://devtter.vercel.app/home)
+
+
 ## Preview
 
 <img src="./screenshot.png" width="40%" />
