@@ -34,17 +34,17 @@ const BottomBar = ({ element }: Props): JSX.Element => {
                   />
                </a>
             </Link>
-            <Link href="">
+            <Link href="/">
                <a>
                   <SearchIcon width="27px" height="27px" />
                </a>
             </Link>
-            <Link href="">
+            <Link href="/">
                <a>
                   <NotificationIcon width="27px" height="27px" />
                </a>
             </Link>
-            <Link href="">
+            <Link href="/">
                <a>
                   <Message width="27px" height="27px" />
                </a>
